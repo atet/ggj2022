@@ -274,7 +274,7 @@ You must escape the following characters in a URL, for example, "`Price = $9.99`
 | `<SPACE>` | %20 | `#` | %23 |
 | `$` | %24 | `%` | %25 |
 | `&` | %26 | `@` | %40 |
-| ````` | %60 | `/` | %2F |
+| `<BACKTICK>` | %60 | `/` | %2F |
 | `:` | %3A | `;` | %3B |
 | `<` | %3C | `=` | %3D |
 | `>` | %3E | `?` | %3F |
