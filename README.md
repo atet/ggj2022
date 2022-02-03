@@ -15,7 +15,7 @@ These are instructions to create the back-end API that generates text for: <URL_
 * [0. Preface](#0-preface)
 * [1. Requirements](#1-requirements)
 * [2. Installation](#2-installation)
-* [3. Python Script](#3-python-script)
+* [3. Interactive Python](#3-interactive-python)
 * [4. Application Programming Interface](#4-application-programming-interface)
 * [5. Next Steps](#5-next-steps)
 
@@ -46,7 +46,7 @@ These are instructions to create the back-end API that generates text for: <URL_
 
 Your local computer (e.g. home laptop and/or desktop) will need to have:
 
-* Broadband internet as we will have to download some pretty big files
+* Broadband internet, as we will have to download some pretty big files
 * ≥8 GB of RAM
 * ≥10 GB of free disk space
 
@@ -131,21 +131,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 [![.img/fig_03.jpg](.img/fig_03.jpg)](#nolink)
 
-```
-11.5 15.1
-$ pip install tensorflow
-
-# PyTorch, go here to determine config: https://pytorch.org/get-started/locally/
-$ pip3 install torch torchvision torchaudio
-# Install Transformers from huggingface.co
-$ pip install transformers
-# Install GPT-2
-$ pip install gpt-2-simple
-
-
-$ python -i -c "import torch; from transformers import GPT2LMHeadModel, GPT2Tokenizer; tokenizer = GPT2Tokenizer.from_pretrained('gpt2'); model = GPT2LMHeadModel.from_pretrained('gpt2'); inputs = 'This is Morgbob\'s Tinder, Twitter, Facebook, and Reddit dating profile. Morgbob is '; count_words = len(inputs.split(' ')); count_words = count_words + 7; inputs = tokenizer.decode(model.generate(tokenizer.encode(inputs, return_tensors='pt'), max_length = count_words, do_sample=True)[0], skip_special_tokens=True); print(inputs)"
-```
-
 [Back to Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------
@@ -167,7 +152,7 @@ Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 Morgbob and Borgmob are not real, they cannot be killed.
 ```
 
-_Well, that's an interesting response... thanks GPT-2 for giving me something new to worry about_
+_Well, that's an interesting response... thanks GPT-2 for giving me something new to worry about_ (you will get different responses than this tutorial)
 
 If you want to continue to play around with GPT-2 within an interactive Python session, you can change the starting prompt "`input`" to something else, but remember to change the variable "`max_length`" to a larger number of words if you require more in the output (input words count towards this number)
 
@@ -188,9 +173,9 @@ _Hmm, ok GPT-2, moving on..._
 
 ## 4. Application Programming Interface
 
-Congratulations on deploying GPT-2 to work locally on your computer, let's try to package this capability up into something more practical, an API ([application programming interface](https://www.ibm.com/cloud/learn/rest-apis))
+Congratulations on deploying GPT-2 to work locally on your computer, let's try to package this capability up into something more practical, such as an API ([application programming interface](https://www.ibm.com/cloud/learn/rest-apis))
 
-We will use the Flask framework to supercharge our capability into the web so quit Python and install Flask:
+We will use the Flask framework to supercharge our capability into the web, so quit Python and install Flask:
 
 ```console
 >>> quit()
@@ -205,22 +190,16 @@ Copy and paste the code below and press `CTRL+o` then `ENTER` to save and `CTRL+
 import torch
 from flask import Flask
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-
 app = Flask(__name__)
-
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 model = GPT2LMHeadModel.from_pretrained('gpt2')
-
 @app.route('/<string:input>/')
 def tinderbot(input=None):
    count_words_input = len(input.split(' ')) # Word count of input
    count_additional_words = 10 # The higher the number, the longer processing with take
    count_max_length = count_words_input + count_additional_words # New total length of output including input
-   
    output = tokenizer.decode(model.generate(tokenizer.encode(input, return_tensors='pt'), max_length = count_max_length, do_sample=True)[0], skip_special_tokens=True)
-   
    return output
-
 if __name__ == '__main__':
    app.run()
 ```
@@ -228,6 +207,7 @@ if __name__ == '__main__':
 ### Run the Flask Application
 
 Once you save this `api.py` script, you just need to run it:
+   * This will take up to a minute to load up
 
 ```console
 $ python ~/miniconda/api.py
@@ -239,9 +219,9 @@ $ python ~/miniconda/api.py
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-It will take a few seconds to load up, but you'll be presented with a prompt to access your API through your web browser at: `http://127.0.0.1:5000/`
+You will be presented with instructions to access your API through your web browser at: `http://127.0.0.1:5000/`
 
-Now on the same computer that you're running your Python code, go to your favorite web browser and enter a prompt after the URL like this and press `ENTER`:
+On the same computer that you're running your Python code, go to your favorite web browser and enter a prompt after the URL like this and press `ENTER`:
    * You can have spaces and _some_ special characters, see [Other Resources: Special Characters in a URL](#special-characters-in-a-url)
 
 [![.img/fig_04.jpg](.img/fig_04.jpg)](#nolink)
@@ -251,7 +231,7 @@ And there you have it, GPT-2 served as an API through a web browser!
 
 [![.img/fig_05.jpg](.img/fig_05.jpg)](#nolink)
 
-Just like the president told CNN, it's not yet safe to put what we just set up on the internet; your GPT-2 API is only accessible on your local computer
+And just like the president told CNN, it's not safe to put our API on the internet...yet; your GPT-2 API is only accessible on your local computer
 
 You have reached the end of this tutorial, deploying your API to the public internet is beyond the scope of this quick tutorial
 
@@ -276,7 +256,7 @@ Deploying this so others can access your API is beyond the scope of this tutoria
 Here are some next steps to unleash your new capability to the world:
 
 1. Do the same thing we just did locally, but in the cloud: https://learn.adafruit.com/a-digitalocean-droplet-in-10-minutes
-2. Secure your traffic with encryption (i.e. `HTTPS://` instead of `HTTP://`) and authentication (API tokens and/or username:passwords)
+2. Secure your traffic with encryption (i.e. `HTTPS://` instead of `HTTP://`) and authentication (API tokens and/or `username`:`password`)
 3. Extra functionality such as a profanity filter (GPT-2 responses can get spicy!)
 
 [Back to Top](#table-of-contents)
@@ -294,7 +274,7 @@ You must escape the following characters in a URL, for example, "`Price = $9.99`
 | `<SPACE>` | %20 | `#` | %23 |
 | `$` | %24 | `%` | %25 |
 | `&` | %26 | `@` | %40 |
-| \` | %60 | `/` | %2F |
+| `\`` | %60 | `/` | %2F |
 | `:` | %3A | `;` | %3B |
 | `<` | %3C | `=` | %3D |
 | `>` | %3E | `?` | %3F |
@@ -302,7 +282,7 @@ You must escape the following characters in a URL, for example, "`Price = $9.99`
 | `]` | %5D | `^` | %5E |
 | `{` | %7B | `|` | %7C |
 | `}` | %7D | `~` | %7E |
-| `"` | %22 | `'` | %27 |
+| `"` | %22 | `\'` | %27 |
 | `+` | %2B | `,` | %2C |
 
 ### External Tutorials
