@@ -6,6 +6,8 @@
 
 These are instructions to create the back-end API that generates text for: <URL_TO_GGJ2022_GAME>
 
+Excluding time to download and install dependencies, you will be able to complete this tutorial in <10 minutes
+
 --------------------------------------------------------------------------------------------------
 
 ## Table of Contents
@@ -152,12 +154,12 @@ Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 Morgbob and Borgmob are not real, they cannot be killed.
 ```
 
-_Well, that's an interesting response... thanks GPT-2 for giving me something new to worry about_ (you will get different responses than this tutorial)
+_Well, that's an interesting response... thanks GPT-2 for giving me something new to worry about_ (you will get different output due to GPT-2 using random generation)
 
 If you want to continue to play around with GPT-2 within an interactive Python session, you can change the starting prompt "`input`" to something else, but remember to change the variable "`max_length`" to a larger number of words if you require more in the output (input words count towards this number)
 
 ```python
->>> input = 'GPT-2 don\'t be so creepy, you\'re making me' # Use escape characters for single quotes
+>>> input = 'GPT-2 don\'t be so creepy, you\'re making me' # Use escape characters for apostrophes/single quotes
 >>> output = tokenizer.decode(model.generate(tokenizer.encode(input, return_tensors='pt'), max_length = 20, do_sample=True)[0], skip_special_tokens=True); print(output)
 
 Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
@@ -173,9 +175,9 @@ _Hmm, ok GPT-2, moving on..._
 
 ## 4. Application Programming Interface
 
-Congratulations on deploying GPT-2 to work locally on your computer, let's try to package this capability up into something more practical, such as an API ([application programming interface](https://www.ibm.com/cloud/learn/rest-apis))
+**Congratulations on deploying GPT-2 to work locally on your computer**, let's try to package this capability up into something more practical, such as an API ([application programming interface](https://www.ibm.com/cloud/learn/rest-apis))
 
-We will use the Flask framework to supercharge our capability into the web, so quit Python and install Flask:
+We will use the Flask framework to supercharge our capability into the web, so quit Python and then install Flask:
 
 ```console
 >>> quit()
@@ -231,7 +233,7 @@ And there you have it, GPT-2 served as an API through a web browser!
 
 [![.img/fig_05.jpg](.img/fig_05.jpg)](#nolink)
 
-And just like the anonymous president told CNN, it's not safe to put our API on the internet...yet; your GPT-2 API is only accessible on your local computer
+And just like the generic president told CNN, it's not safe to put our API on the internet...yet; _your GPT-2 API is only accessible on your local computer_
 
 You have reached the end of this tutorial, deploying your API to the public internet is beyond the scope of this quick tutorial
 
@@ -249,15 +251,15 @@ $ rm -rf ~/miniconda
 
 ## 5. Next Steps
 
-The local installation of GPT-2 as an API on your local computer is not readily accessible by others through the internet
+This local installation of the GPT-2 API on your computer is not accessible by anyone else
 
-Deploying this so others can access your API is beyond the scope of this tutorial
+Deploying this on the internet so others can access your API is beyond the scope of this tutorial
 
 Here are some next steps to unleash your new capability to the world:
 
 1. Do the same thing we just did locally, but in the cloud: https://learn.adafruit.com/a-digitalocean-droplet-in-10-minutes
-2. Secure your traffic with encryption (i.e. `HTTPS://` instead of `HTTP://`) and authentication (API tokens and/or `username`:`password`)
-3. Extra functionality such as a profanity filter (GPT-2 responses can get spicy!)
+2. Secure with encryption (i.e. `HTTPS://` instead of `HTTP://`) and authentication (API tokens and/or `username`:`password`)
+3. Add functionality such as a profanity filter (GPT-2 responses can get quite spicy!)
 
 [Back to Top](#table-of-contents)
 
@@ -278,7 +280,7 @@ You must escape the following characters in a URL, for example, "`Price = $9.99`
 | `:` | %3A | `;` | %3B |
 | `<` | %3C | `=` | %3D |
 | `>` | %3E | `?` | %3F |
-| `[` | %5B | `\\` | %5C |
+| `[` | %5B | `\` | %5C |
 | `]` | %5D | `^` | %5E |
 | `{` | %7B | `\|` | %7C |
 | `}` | %7D | `~` | %7E |
@@ -309,11 +311,10 @@ Issue | Solution
 
 ## Acknowledgments
 
-* > "Some inspirational quote about collaboration and synergy." - Unknown
 * Angela, for contributing to our off-the-wall brainstorming session
 * [Team DERP](https://globalgamejam.org/2020/games/rapid-restoration-4) + [Team Orenji Gaijin](https://github.com/atet/ggj2021) =
 
-<div style="text-align: center"><a href="#nolink"><img src=".img/logo_teamusaandusa.png" align="center"></a></div>
+<p align="center"><a href="#nolink"><img src=".img/logo_teamusaandusa.png" align="center"></a></p>
 
 [Back to Top](#table-of-contents)
 
