@@ -231,7 +231,7 @@ And there you have it, GPT-2 served as an API through a web browser!
 
 [![.img/fig_05.jpg](.img/fig_05.jpg)](#nolink)
 
-And just like the president told CNN, it's not safe to put our API on the internet...yet; your GPT-2 API is only accessible on your local computer
+And just like the anonymous president told CNN, it's not safe to put our API on the internet...yet; your GPT-2 API is only accessible on your local computer
 
 You have reached the end of this tutorial, deploying your API to the public internet is beyond the scope of this quick tutorial
 
@@ -289,9 +289,9 @@ You must escape the following characters in a URL, for example, "`Price = $9.99`
 
 Description | Link
 --- | ---
-**"What is a CLI and/or Docker?"** | https://github.com/atet/learn/tree/master/virtual
 **"A cloud server what now?"** | https://learn.adafruit.com/a-digitalocean-droplet-in-10-minutes
-**"MOAR PYTHON!!!"** | https://github.com/atet/learn/tree/master/programming
+**"I want to learn Python"** | https://github.com/atet/learn/tree/master/programming
+**"MOAR MORGBOB!!!"** | https://www.morgbob.com
 
 [Back to Top](#table-of-contents)
 
