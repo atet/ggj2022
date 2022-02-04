@@ -247,6 +247,8 @@ If you don't need to use GPT-2 after this tutorial and would rather have 5+ GBs 
 $ rm -rf ~/miniconda
 ```
 
+[Back to Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------
 
 ## 5. Next Steps
