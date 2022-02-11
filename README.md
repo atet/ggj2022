@@ -6,7 +6,7 @@
 
 These are instructions to create the back-end API that generates text for: <URL_TO_GGJ2022_GAME>
 
-Excluding time to download and install dependencies, you will be able to complete this tutorial in <10 minutes
+Excluding time to download and install dependencies, _**you will be able to complete this tutorial in ~10 minutes**_
 
 --------------------------------------------------------------------------------------------------
 
@@ -31,8 +31,8 @@ Excluding time to download and install dependencies, you will be able to complet
 
 ## 0. Preface
 
-* We will install the [GPT-2 model](https://en.wikipedia.org/wiki/GPT-2) to generate human-like text on our local computer
-* Here is a fun example of using it to finish a sentence:
+* We will generate human-like text using [**"_artificial intelligence_"** (a.k.a. AI)†](#acknowledgments)
+* Here is a fun example of using AI to finish a sentence:
 
   > `Input : "Morgbob is the"`
   >
@@ -44,9 +44,9 @@ Excluding time to download and install dependencies, you will be able to complet
 
 ## 1. Requirements
 
-### Local Computer
+### Development Computer
 
-Your local computer (e.g. home laptop and/or desktop) will need to have:
+For your computer, you will need to have:
 
 * Broadband internet, as we will have to download some pretty big files
 * ≥8 GB of RAM
@@ -54,15 +54,13 @@ Your local computer (e.g. home laptop and/or desktop) will need to have:
 
 ### Command Line Interface (CLI)
 
-A Linux CLI will be used to execute commands on our server; if you feel like you need a refresher, please see: https://github.com/atet/learn/tree/master/regex
+A Linux CLI will be used to easily execute copy & pasted commands here; if you feel like you need a refresher, please see: https://github.com/atet/learn/tree/master/regex
 
 You can use the following CLI depending on your operating system:
 
 #### Windows 10
 
-* Windows Subsystem for Linux (WSL) is a fully supported Microsoft product for Windows 10, learn how to install it here: [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-* Please choose Ubuntu 18.04 LTS as the distribution you use with WSL
-* WSL is only available for Windows 10
+* Windows Subsystem for Linux (WSL) is a fully supported Microsoft product for Windows 10, learn how to install it here: https://github.com/atet/wsl
 
 #### MacOS
 
@@ -70,7 +68,7 @@ You can use the following CLI depending on your operating system:
 
 #### Linux
 
-* I recommend using Ubuntu 18.04 LTS
+* I recommend using Ubuntu 20.04 LTS
 
 [Back to Top](#table-of-contents)
 
@@ -78,23 +76,25 @@ You can use the following CLI depending on your operating system:
 
 ## 2. Installation
 
-Each of the following steps will download hundreds of MBs of dependencies in order to run GPT-2, depending on you internet connection, some of the following steps can take ≥10 minutes or more each; _plenty of coffee breaks here_
+Each of the following steps will download hundreds of MBs of dependencies in order to run the AI (henceforth also referred to as the "GPT-2 model")
+
+Depending on your internet connection, some of the following steps can take ≥10 minutes or more each; _plenty of coffee breaks here_
 
 ### Update Everything
 
 * Start up your CLI and make sure you have set up your user with `sudo` privileges and run the following to update everything:
 
-```console
+```bash
 $ sudo apt update && sudo apt -y upgrade
 ```
 
 ### Python
 
-* We will install Python 3 through Miniconda in one line:
-   * Must use older Python 3.7 or earlier, not the latest
+* We will install Python in one line:
+   * Must use an older Python 3.7 or earlier; cannot be the latest version
    * The last command ("`exit`") will log you out, this is required
 
-```console
+```bash
 $ cd ~ && \
   wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh && \
   bash Miniconda3-py37_4.10.3-Linux-x86_64.sh -b -p $HOME/miniconda && \
@@ -105,8 +105,9 @@ $ cd ~ && \
 [![.img/fig_01.jpg](.img/fig_01.jpg)](#nolink)
 
 * Log back into your user and confirm with the "`which`" command that Python from Miniconda is installed:
+   * `<USER>` = Whatever username you are
 
-```console
+```bash
 $ which python
 /home/<USER>/miniconda/bin/python
 ```
@@ -115,7 +116,7 @@ $ which python
 
 * Now we will download all the required Python packages:
 
-```console
+```bash
 $ pip3 install tensorflow torch torchvision torchaudio transformers gpt-2-simple
 ```
 
@@ -140,7 +141,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ## 3. Interactive Python
 
 We now have everything needed to use GPT-2, let's start up another Python session and execute the following lines:
-   * If you see warnings, you may be able to ignore them and move on
+   * If you see warnings (like what's shown below), you may be able to ignore them and move on
 
 ```python
 >>> import torch; from transformers import GPT2LMHeadModel, GPT2Tokenizer; tokenizer = GPT2Tokenizer.from_pretrained('gpt2'); model = GPT2LMHeadModel.from_pretrained('gpt2')
@@ -175,18 +176,17 @@ _Hmm, ok GPT-2, moving on..._
 
 ## 4. Application Programming Interface
 
-**Congratulations on deploying GPT-2 to work locally on your computer**, let's try to package this capability up into something more practical, such as an API ([application programming interface](https://www.ibm.com/cloud/learn/rest-apis))
+**Congratulations on deploying an AI model to work on your computer's CLI**, let's try to package this capability up into something more practical, such as being able to use this through a web browser like Internet Explorer!
 
-We will use the Flask framework to supercharge our capability into the web, so quit Python and then install Flask:
+We will use the Flask framework to supercharge our capability into the web as an API ([application programming interface](https://www.ibm.com/cloud/learn/rest-apis)), so quit Python and then install Flask:
 
-```console
+```bash
 >>> quit()
 $ pip3 install flask && nano ~/miniconda/api.py
 ```
 
-The above command will create a new file called "`api.py`" in the "`nano`" text editor
-
-Copy and paste the code below and press `CTRL+o` then `ENTER` to save and `CTRL+x` to exit the `nano` text editor
+* The above command will create a new file called "`api.py`" in the "`nano`" text editor:
+   * Copy and paste the code below and press `CTRL+o` then `ENTER` to save and `CTRL+x` to exit the `nano` text editor
 
 ```python
 import torch
@@ -208,10 +208,10 @@ if __name__ == '__main__':
 
 ### Run the Flask Application
 
-Once you save this `api.py` script, you just need to run it:
+* Once you save this `api.py` script, you just need to run it:
    * This will take up to a minute to load up
 
-```console
+```bash
 $ python ~/miniconda/api.py
 * Serving Flask app 'api' (lazy loading)
 * Environment: production
@@ -221,29 +221,32 @@ $ python ~/miniconda/api.py
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-You will be presented with instructions to access your API through your web browser at: `http://127.0.0.1:5000/`
-
-On the same computer that you're running your Python code, go to your favorite web browser and enter a prompt after the URL like this and press `ENTER`:
+* You will be presented with instructions to access your API through your web browser at: `http://127.0.0.1:5000/`
+* On the same computer that you're running your Python code, go to your favorite web browser and enter a prompt after the URL like this and press `ENTER`:
    * You can have spaces and _some_ special characters, see [Other Resources: Special Characters in a URL](#special-characters-in-a-url)
 
 [![.img/fig_04.jpg](.img/fig_04.jpg)](#nolink)
 
-And there you have it, GPT-2 served as an API through a web browser!
+* And there you have it, GPT-2 served as an API through a web browser!
    * Your web browser will likely convert non-alphanumeric characters to the special escaped characters
 
 [![.img/fig_05.jpg](.img/fig_05.jpg)](#nolink)
 
-And just like the generic president told CNN, it's not safe to put our API on the internet...yet; _your GPT-2 API is only accessible on your local computer_
+* And just like the president told CNN, it's not safe to put our API on the internet...yet; _your API is only accessible on your local computer_
 
-You have reached the end of this tutorial, deploying your API to the public internet is beyond the scope of this quick tutorial
+### **You have reached the end of this tutorial, deploying your API to the public internet is beyond the scope of this quick tutorial**
+
+[Back to Top](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------
 
 ### OPTIONAL: Cleanup
 
 If you don't need to use GPT-2 after this tutorial and would rather have 5+ GBs of disk space back, you can remove the entire `~/miniconda` directory:
 
-**WARNING: The "`rm -rf`" command is very powerful as it will send the target file or directory into oblivion, never to be seen again; be extra certain this is what you want to do, there's no "Recycling Bin" in CLI**
+>**WARNING: The "`rm -rf`" command is very powerful as it will send the target file or directory into oblivion, never to be seen again; be extra certain this is what you want to do, there's no "Recycling Bin" in CLI!**
 
-```console
+```bash
 $ rm -rf ~/miniconda
 ```
 
@@ -260,7 +263,7 @@ Deploying this on the internet so others can access your API is beyond the scope
 Here are some next steps to unleash your new capability to the world:
 
 1. Do the same thing we just did locally, but in the cloud: https://learn.adafruit.com/a-digitalocean-droplet-in-10-minutes
-2. Secure with encryption (i.e. `HTTPS://` instead of `HTTP://`) and authentication (API tokens and/or `username`:`password`)
+2. Secure with encryption (i.e. `https://` instead of `http://`) and authentication (API tokens and/or `username`:`password`)
 3. Add functionality such as a profanity filter (GPT-2 responses can get quite spicy!)
 
 [Back to Top](#table-of-contents)
@@ -271,7 +274,9 @@ Here are some next steps to unleash your new capability to the world:
 
 ### Special Characters in a URL
 
-You must escape the following characters in a URL, for example, "`Price = $9.99`" must be "`Price%20%3D%20%249.99`"
+You must escape the following characters in a URL, for example:
+
+"`Price = $9.99`" must be "`Price%20%3D%20%249.99`"
 
 | Character | Escape Character | Character | Escape Character |
 | -: | :- | -: | :- |
@@ -313,6 +318,7 @@ Issue | Solution
 
 ## Acknowledgments
 
+* [†AI → GPT-2 model](https://en.wikipedia.org/wiki/GPT-2)
 * Angela, for contributing to our off-the-wall brainstorming session
 * [Team DERP](https://globalgamejam.org/2020/games/rapid-restoration-4) + [Team Orenji Gaijin](https://github.com/atet/ggj2021) =
 
