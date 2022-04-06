@@ -4,7 +4,7 @@
 
 # Global Game Jam 2022: TinderBot API
 
-These are instructions to create the back-end API that generates text for: <URL_TO_GGJ2022_GAME>
+These are instructions to create the back-end API that generates text for: http://tinderbot.morgbob.com
 
 Excluding time to download and install dependencies, _**you will be able to complete this tutorial in ~10 minutes**_
 
@@ -322,7 +322,7 @@ Issue | Solution
 * Angela, for contributing to our off-the-wall brainstorming session
 * [Team DERP](https://globalgamejam.org/2020/games/rapid-restoration-4) + [Team Orenji Gaijin](https://github.com/atet/ggj2021) =
 
-<p align="center"><a href="#nolink"><img src=".img/logo_teamusaandusa.png" align="center"></a></p>
+<p align="center"><a href="https://globalgamejam.org/2022/games/tinderbot-8"><img src=".img/logo_teamusaandusa.png" align="center"></a></p>
 
 [Back to Top](#table-of-contents)
 
